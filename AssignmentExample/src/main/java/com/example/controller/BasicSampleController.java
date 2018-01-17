@@ -7,12 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.model.InfoModel;
 import com.example.service.InfoService;
 
 @Controller
-public class HelloController {
+public class BasicSampleController {
 
     @Autowired
     private InfoService service;
@@ -24,7 +25,7 @@ public class HelloController {
             list = service.getInfo();
             map.addAttribute("listInfo", list);
         } catch (Exception e) {
-            return "redirect:/error";
+            return "redirect:/error?msg=" + e.getMessage();
         }
         return "hello";
     }
@@ -34,9 +35,15 @@ public class HelloController {
         try {
             service.saveInfo(info);
         } catch (Exception e) {
-            return "redirect:/error";
+            return "redirect:/error?msg=" + e.getMessage();
         }
         return "redirect:/";
+    }
+
+    @RequestMapping(name = "error", path = "/error")
+    public String error(@RequestParam("msg") String msg, ModelMap map) {
+        map.addAttribute("msg", msg);
+        return "error";
     }
 
 }

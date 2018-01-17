@@ -12,7 +12,6 @@ import com.example.model.InfoModel;
  * @author minhnn
  *
  */
-@Service
 public interface InfoService {
 
     /**

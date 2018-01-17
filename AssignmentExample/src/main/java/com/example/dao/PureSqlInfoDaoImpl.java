@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.example.model.InfoModel;
 
+@Repository
 public class PureSqlInfoDaoImpl implements InfoDao {
 
     @Autowired
@@ -14,7 +16,7 @@ public class PureSqlInfoDaoImpl implements InfoDao {
 
     @Override
     public void save(InfoModel model) throws Exception {
-        String sql = "insert into info values (?,?)";
+        String sql = "insert into info (name, value) values (?, ?)";
         jdbcTemplate.update(sql, new Object[] { model.getName(), model.getValue() });
     }
 

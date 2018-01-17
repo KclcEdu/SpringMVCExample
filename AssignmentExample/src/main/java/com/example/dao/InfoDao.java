@@ -12,7 +12,6 @@ import com.example.model.InfoModel;
  * @author minhnn
  *
  */
-@Repository
 public interface InfoDao {
     /**
      * Save a model to DB
